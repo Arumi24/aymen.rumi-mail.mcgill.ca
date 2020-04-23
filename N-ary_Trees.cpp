@@ -90,8 +90,7 @@ void Tree::printPreOrder(Node *node)
         for(int i=0;i<node->children.size();i++)
         {
             printPreOrder(node->children[i]);
-        }
-        
+        }     
     }
 }
 
@@ -111,9 +110,8 @@ void Tree::printPostOrder(Node *node)
         {
             printPostOrder(node->children[i]);
         }
-
-        cout << node->value <<endl;
         
+        cout << node->value <<endl;
     }
 }
 
