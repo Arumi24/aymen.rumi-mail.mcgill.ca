@@ -230,7 +230,6 @@ void BinaryTree::removeNode(int value, Node *node)
     {
         if (node->left->key_value == value && (node->left->left == NULL && node->left->right == NULL))
         {
-
             delete node->left;
             node->left = NULL;
         }
