@@ -79,7 +79,6 @@ int MinHeap::countNodes(Node *node)
 
     if (node->left != NULL && node->right != NULL)
     {
-
         return 2 + countNodes(node->left) + countNodes(node->right);
     }
     else if (node->left != NULL && node->right == NULL)
@@ -141,27 +140,18 @@ void MinHeap::insert(int value, Node *node)
     {
         if (countNodes(node->left) > countNodes(node->right))
         {
-            cout << "here bitches" << endl;
-            cout << "left tree is " << countNodes(node->left) << endl;
-            cout << "right tree is " << countNodes(node->right) << endl;
-            cout << endl;
+
             if (countNodes(node->left) % 2 != 0)
             {
-                cout << "inserting " << value << " left" << endl;
                 insert(value, node->left);
             }
             else if (countNodes(node->left) % 2 == 0)
             {
-                cout << "inserting " << value << " right" << endl;
                 insert(value, node->right);
             }
         }
         else if (countNodes(node->left) == countNodes(node->right))
         {
-            cout << "left tree is " << countNodes(node->left) << endl;
-            cout << "right tree is " << countNodes(node->right) << endl;
-            cout << "inserting " << value << " left throught middle" << endl;
-            cout << endl;
             insert(value, node->left);
         }
     }
@@ -198,12 +188,10 @@ void MinHeap::remove(int value, Node *node)
 
         if (node->left != NULL)
         {
-
             remove(value, node->left);
         }
         if (node->right != NULL)
         {
-
             remove(value, node->right);
         }
     }
@@ -221,7 +209,6 @@ int MinHeap::leftMostLeaf(Node *node)
     if (node->extraPointer->extraPointer->parent->right != NULL &&
         node->extraPointer->extraPointer->parent->right->value == node->extraPointer->extraPointer->value)
     {
-
         node->extraPointer->extraPointer->parent->right = NULL;
     }
 
@@ -444,8 +431,6 @@ void MaxHeap::printTree()
 int main()
 {
     MinHeap heap;
-
-    cout << "hello" << endl;
 
     for (int i = 35; i > 0; i--)
     {
