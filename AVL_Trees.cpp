@@ -24,14 +24,15 @@ public:
     void rotateLeft(Node *node);
     int subTreeHeight(Node *node);
     void balanceFactor(Node *node);
+    void balance();
+    void balance(Node *node);
+
+    int detectUnbalance(Node *node);
 
     Node *root;
 
 private:
     void insert(int value, Node *node);
-
-    void balance();
-    void balance(Node *node);
 
     void printLevelOrder(Node *node, int level);
 
@@ -43,6 +44,47 @@ AVL_Tree::AVL_Tree()
     root = NULL;
 }
 
+int AVL_Tree::detectUnbalance(Node *node)
+{
+    if (node->balanceFactor == 2 || node->balanceFactor == -2)
+    {
+        if (node->right != NULL && node->left != NULL)
+        {
+            return 1 + detectUnbalance(node->right) + detectUnbalance(node->left);
+        }
+        else if (node->right != NULL && node->left == NULL)
+        {
+            return 1 + detectUnbalance(node->right);
+        }
+        else if (node->right == NULL && node->left != NULL)
+        {
+            return 1 + detectUnbalance(node->left);
+        }
+        else
+        {
+            return 1;
+        }
+    }
+    else
+    {
+        if (node->right != NULL && node->left != NULL)
+        {
+            return 0 + detectUnbalance(node->right) + detectUnbalance(node->left);
+        }
+        else if (node->right != NULL && node->left == NULL)
+        {
+            return 0 + detectUnbalance(node->right);
+        }
+        else if (node->right == NULL && node->left != NULL)
+        {
+            return 0 + detectUnbalance(node->left);
+        }
+        else
+        {
+            return 0;
+        }
+    }
+}
 void AVL_Tree::insert(int value, Node *node)
 {
 
@@ -56,9 +98,13 @@ void AVL_Tree::insert(int value, Node *node)
             node->right->left = NULL;
             node->right->height = node->height + 1;
             node->right->parent = node;
+
             balanceFactor(node->right);
 
-            balance(root);
+            while (detectUnbalance(root) != 0)
+            {
+                balance(root);
+            }
 
             if (node->height + 1 > height)
             {
@@ -81,7 +127,11 @@ void AVL_Tree::insert(int value, Node *node)
             node->left->height = node->height + 1;
             node->left->parent = node;
             balanceFactor(node->left);
-            balance(root);
+
+            while (detectUnbalance(root) != 0)
+            {
+                balance(root);
+            }
 
             if (node->height + 1 > height)
             {
@@ -106,7 +156,6 @@ void AVL_Tree::insert(int value)
         root->parent = NULL;
         root->height = 0;
         balanceFactor(root);
-
         height = 0;
     }
     else
@@ -386,7 +435,11 @@ int main()
     tree.insert(16);
     tree.insert(14);
     tree.insert(1);
-   
+    tree.insert(2);
+    tree.insert(13);
+    tree.insert(30);
+    tree.insert(31);
+
 
     tree.printLevelOrder();
 
