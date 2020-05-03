@@ -15,7 +15,6 @@ Red-Black Tree Properties:
 
 **/
 
-
 enum Color {RED, BLACK};
 enum Relationship {LeftChild,RightChild,Root};
 
@@ -86,7 +85,6 @@ void RedBlack_Tree::rightRotate(Node *node)
         node->left=node->left->right;
         node->left->parent=node;
     }
-    
     node->parent->right=node;
     
     node->parent->color=BLACK;
@@ -115,10 +113,7 @@ void RedBlack_Tree::leftRotate(Node *node)
         {
             node->right->relation=RightChild;
             node->parent->right=node->right;
-        }
-
-        
-        
+        }    
     }
 
     node->parent=node->right;
@@ -132,8 +127,7 @@ void RedBlack_Tree::leftRotate(Node *node)
     {
         node->right=NULL;
     }
-    
-    
+
     node->parent->left=node;
 
     node->parent->left->color=RED;
@@ -199,7 +193,6 @@ void RedBlack_Tree::restoreProperty(Node *node)
             } 
         }
     }
-  
 }
 
 void RedBlack_Tree::insert(int value, Node *node)
@@ -268,8 +261,7 @@ void RedBlack_Tree::insert(int value)
     else
     {
         insert(value,root);
-    }
-    
+    } 
 }
 
 void RedBlack_Tree::printLevelOrder(Node *node, int level)
@@ -284,9 +276,7 @@ void RedBlack_Tree::printLevelOrder(Node *node, int level)
         else
         {
             cout << node->value << " " << "BLACK" << " ,";
-        }
-        
-        
+        }     
     }
     else
     {
@@ -314,8 +304,6 @@ int main()
 {
     RedBlack_Tree tree;
 
-   
-
     tree.insert(10);
     tree.insert(20);
     tree.insert(5);
@@ -325,12 +313,5 @@ int main()
     tree.insert(4);
     tree.insert(1);
   
-  
-   
-
     tree.printLevelOrder();
-
-   
-
-  
 }
